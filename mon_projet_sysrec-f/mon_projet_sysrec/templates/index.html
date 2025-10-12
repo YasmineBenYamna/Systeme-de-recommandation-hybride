@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <!-- basic -->
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!-- mobile metas -->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+      <!-- site metas -->
+      <title>Frica</title>
+      <meta name="keywords" content="">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<!-- Font Awesome (pour les icônes) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<!-- Bootstrap JS & jQuery (en fin de body de préférence) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+      <!-- bootstrap css -->
+      
+      <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* ===== NAVIGATION ===== */
+        nav {
+            background-color: #252525;
+            color: white;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        nav .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #ff4a52;
+        }
+
+        nav ul li a:hover {
+            background-color: transparent; /* Retire le fond coloré */
+            color:rgb(250, 249, 249); /* Change seulement la couleur du texte si vous voulez */
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            margin: 0;
+            padding: 0;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: background 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            background-color: #ff4a52;
+        }
+        
+        /* Banner Section */
+        .banner_section {
+            padding: 50px 0;
+        }
+        
+        .banner_taital {
+            font-size: 2.5rem;
+            color: #252525;
+            text-align: center;
+            margin: 30px 0;
+            position: relative;
+        }
+        
+        .banner_taital::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 3px;
+            background-color: #ff4a52;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -10px;
+            border-radius: 5px;
+        }
+        
+        .border_1 {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .buynow_bt a, .contact_bt a {
+            padding: 12px 30px;
+            background-color: #252525;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-decoration: none;
+        }
+        
+        .buynow_bt a:hover, .contact_bt a:hover {
+            background-color: #ff4a52;
+            box-shadow: 0 4px 12px rgba(255, 74, 82, 0.3);
+        }
+        
+        /* Computers Section */
+        .computers_section {
+            padding: 80px 0;
+        }
+        
+        .computers_taital {
+            font-size: 2.5rem;
+            color: #252525;
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .computers_taital::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 3px;
+            background-color: #ff4a52;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -15px;
+            border-radius: 5px;
+        }
+        
+        .computer_main {
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            margin-bottom: 30px;
+        }
+        
+        .computer_main:hover {
+            transform: translateY(-5px);
+        }
+        
+        .computer_text {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #252525;
+            margin: 15px 0;
+        }
+        
+        .dell_text {
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .price_text {
+            color: #ff4a52;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .price_text_1 {
+            color: #999;
+            text-decoration: line-through;
+            margin-left: 10px;
+        }
+        
+        .cart_bt_1 a {
+            padding: 10px 25px;
+            background-color: #252525;
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .cart_bt_1 a:hover {
+            background-color: #ff4a52;
+            box-shadow: 0 4px 12px rgba(255, 74, 82, 0.3);
+        }
+        
+        /* Offer Section */
+        .mans_section_2 {
+            background-color: #252525;
+            color: white;
+            padding: 80px 0;
+        }
+        
+        .offer_text {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+        
+        .lorem_text {
+            color: #ddd;
+            margin-bottom: 30px;
+        }
+        
+        .read_bt a {
+            padding: 12px 30px;
+            background-color: #ff4a52;
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .read_bt a:hover {
+            background-color: #fff;
+            color: #252525;
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+        }
+        
+        /* ===== FOOTER ===== */
+        .footer_section {
+            background-color: #252525;
+            color: white;
+            padding: 60px 20px;
+            margin-top: 80px;
+        }
+        
+        .footer_section a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer_section a:hover {
+            color: #ff4a52;
+        }
+        
+        .adderss_text {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #fff;
+            position: relative;
+        }
+        
+        .adderss_text::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 3px;
+            background-color: #ff4a52;
+            left: 0;
+            bottom: -10px;
+            border-radius: 5px;
+        }
+        
+        .ipsum_text {
+            color: #ddd;
+        }
+        
+        .footer_menu ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer_menu ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer_menu ul li a {
+            color: #ddd;
+            transition: all 0.3s;
+        }
+        
+        .footer_menu ul li a:hover {
+            color: #ff4a52;
+            padding-left: 5px;
+        }
+        
+        .call_text {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            color: #ddd;
+        }
+        
+        .call_text img {
+            margin-right: 10px;
+        }
+        
+        /* Copyright Section */
+        .copyright_section {
+            background-color: #111;
+            color: #ccc;
+            text-align: center;
+            padding: 20px 0;
+        }
+        
+        .copyright_text a {
+            color: #ff4a52;
+        }
+        
+        /* ===== RESPONSIVE NAVIGATION ===== */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+        
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+        }
+        
+        @media screen and (max-width: 768px) {
+            nav {
+                padding: 15px 20px;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                background-color: #252525;
+                position: absolute;
+                top: 70px;
+                right: 20px;
+                width: 200px;
+                display: none;
+                padding: 15px;
+                border-radius: 10px;
+                z-index: 1000;
+            }
+        
+            nav ul.show {
+                display: flex;
+            }
+        
+            .hamburger {
+                display: flex;
+            }
+            
+            .banner_taital, .computers_taital {
+                font-size: 2rem;
+            }
+            
+            .border_1 {
+                padding: 20px;
+            }
+        }
+        
+        @media (max-width: 575px) {
+            .banner_taital, .computers_taital, .offer_text {
+                font-size: 1.8rem;
+            }
+            
+            .footer_section {
+                padding: 40px 15px;
+            }
+        }
+        
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+      </style>
+   </head>
+   <body>
+      <!-- header section start -->
+      <!-- NAVIGATION -->
+      <nav>
+        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+            <div class="logo">Frica</div>
+            <div class="nav-links">
+                <div class="hamburger" onclick="toggleMenu()">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <ul>
+                    <li><a href="{{ url_for('index') }}">Accueil</a></li>
+                    <li><a href="{{ url_for('computers') }}">Produits</a></li>
+                    <li><a href="{{ url_for('contact') }}">Contact</a></li>
+                    <li><a href="{{ url_for('login') }}">Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+      <!-- header section end -->
+      
+      <!-- banner section start -->
+      <div class="banner_section layout_padding margin_top_90">
+         <div id="my_slider" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+               <div class="carousel-item active">
+                  <div class="container">
+                     <div class="row border_1 fade-in">
+                        <div class="col-md-4">
+                            <div class="image_2"><img src="{{ url_for('static', filename='product.jpg') }}" style="width:100%"></div>
+                        </div>
+                        <div class="col-md-4">
+                           <h1 class="banner_taital">Big Sale Offer</h1>
+                           
+                           <div class="contact_bt"><a href="{{ url_for('computers') }}">Buy Now</a></div>
+                        </div>
+                        <div class="col-md-4">
+                           
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               
+            <a class="carousel-control-prev" href="#my_slider" role="button" data-slide="prev">
+              <i class="fa fa-angle-left"></i>
+            </a>
+            <a class="carousel-control-next" href="#my_slider" role="button" data-slide="next">
+              <i class="fa fa-angle-right"></i>
+            </a>
+         </div>
+      </div>
+      <!-- banner section end -->
+      
+      <!-- footer section start -->
+      <div class="footer_section layout_padding margin_top_90">
+         <div class="container">
+            <div class="footer_section_2">
+               <div class="row">
+                  <div class="col-lg-3 col-sm-6">
+                     <h4 class="adderss_text">About</h4>
+                     <p class="ipsum_text">Nous sommes une boutique en ligne spécialisée dans la vente de produits électroniques de qualité, allant des ordinateurs aux accessoires électroniques. Nous nous engageons à offrir des produits à la pointe de la technologie et un service client irréprochable.</p>
+                  </div>
+                  <div class="col-lg-3 col-sm-6">
+                     <h4 class="adderss_text">Menu</h4>
+                     <div class="footer_menu">
+                        <ul>
+                           <li><a href="{{ url_for('index') }}">Accueil</a></li>
+                           <li><a href="{{ url_for('computers') }}">Computers</a></li>
+                           <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
+                        </ul>
+                     </div>
+                  </div>
+                  <div class="col-lg-3 col-sm-6">
+                    <h4 class="adderss_text">Liens </h4>
+                    <div class="footer_menu">
+                        <ul>
+                            <li>
+                                <a href="https://www.facebook.com/" target="_blank">
+                                    <i class="bi bi-facebook me-2"></i>Facebook
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.instagram.com/" target="_blank">
+                                    <i class="bi bi-instagram me-2"></i>Instagram
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                  <div class="col-lg-3 col-sm-6">
+                    <h4 class="adderss_text">Contact</h4>
+                    <div class="call_text"><span class="paddlin_left_0"><a href="#">Tunis 1002, Tunisie</a></span></div>
+                    <div class="call_text"><span class="paddlin_left_0"><a href="#">+216 71 000 000</a></span></div>
+                    <div class="call_text"><span class="paddlin_left_0"><a href="#">contact@Frica.tn</a></span></div>
+                </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- footer section end -->
+      
+      <!-- copyright section start -->
+      <div class="copyright_section">
+         <div class="container">
+            <p class="copyright_text">2020 All Rights Reserved. Design by <a href="https://html.design">Free html Templates</a></p>
+         </div>
+      </div>
+      <!-- copyright section end -->
+      
+      <!-- Javascript files-->
+      <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/jquery-3.0.0.min.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/plugin.js') }}"></script>
+      <!-- sidebar -->
+      <script src="{{ url_for('static', filename='js/jquery.mCustomScrollbar.concat.min.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
+      <!-- javascript --> 
+      <script src="{{ url_for('static', filename='js/owl.carousel.js') }}"></script>
+      <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>  
+      <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+      <script>
+         function openNav() {
+           document.getElementById("mySidenav").style.width = "100%";
+         }
+         
+         function closeNav() {
+           document.getElementById("mySidenav").style.width = "0";
+         }
+         
+         function toggleMenu() {
+             const navLinks = document.querySelector('.nav-links ul');
+             navLinks.classList.toggle('show');
+         }
+      </script> 
+   </body>
+</html>

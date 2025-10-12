@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de bord de l'utilisateur</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --accent-color: #e63946;
+            --background-color: #f1f3f9;
+            --text-dark: #252525;
+            --text-light: #555;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 0;
+            color: var(--text-dark);
+        }
+
+        nav .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 30px 20px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.4rem;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent-color);
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -10px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin: 40px 0 20px;
+            padding-left: 10px;
+            border-left: 5px solid var(--accent-color);
+        }
+
+        .product-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .product-item {
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .product-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-item h3 {
+            margin: 10px 0 5px;
+            font-size: 1.2rem;
+            color: var(--accent-color);
+        }
+
+        .product-item p {
+            margin: 6px 0;
+            color: var(--text-light);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #c9323c;
+        }
+
+        .product-image {
+            width: 100%;
+            max-height: 180px;
+            object-fit: contain;
+            border-radius: 6px;
+            background-color: #f8f8f8;
+            margin-bottom: 10px;
+        }
+
+        .rating-stars {
+            font-size: 1.5rem;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+
+        .rating-stars .star {
+            color: #ddd;
+            transition: color 0.2s ease;
+        }
+
+        .rating-stars .star:hover,
+        .rating-stars .star.active {
+            color: #ffc107;
+        }
+
+        .text-center {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        /* NAVIGATION */
+        nav {
+            background-color: #252525;
+            color: white;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        nav .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #ff4a52;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            margin: 0;
+            padding: 0;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            color: #ff4a52;
+            background-color: transparent;
+        }
+        
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+        
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        /* Styles pour les modals */
+        .modal-content {
+            border-radius: 12px;
+        }
+
+        .modal-header {
+            border-bottom: 1px solid #dee2e6;
+            padding: 15px 20px;
+        }
+
+        .modal-footer {
+            border-top: 1px solid #dee2e6;
+            padding: 15px 20px;
+        }
+
+        .modal-title {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+
+        .btn-primary {
+            background-color: #0d6efd;
+        }
+
+        .btn-primary:hover {
+            background-color: #0b5ed7;
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <nav>
+        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+            <div class="logo">Frica</div>
+            <div class="nav-links">
+                <div class="hamburger" onclick="toggleMenu()">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <ul id="nav-ul">
+                    <li><a href="{{ url_for('index') }}">Accueil</a></li>
+                    <li><a href="{{ url_for('contact') }}">Contact</a></li>
+                    <li><a href="{{ url_for('index') }}">Deconnexion</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Bienvenue, {{ session['username'] }} !</h1>
+    
+        <!-- Section Produits Recommandés -->
+        <div class="section">
+            <h2 class="section-title">Produits recommandés pour vous :</h2>
+            {% if produits_recommandes %}
+                <ul class="product-list">
+                    {% for produit in produits_recommandes %}
+                        <li class="product-item">
+                            <img src="{{ url_for('static', filename='images/' + produit.image_url) }}" alt="{{ produit.nomproduit }}" class="product-image">
+                            <h3>{{ produit.nomproduit }}</h3>
+                            <p><strong>Prix :</strong> {{ produit.prix }} €</p>
+                            <p><strong>Description :</strong> {{ produit.description[:100] }}...</p>
+                            <div class="rating-stars" data-product-id="{{ produit.id_produit }}" data-current-rating="{{ produit.note if produit.note is defined else 0 }}">
+                                <span class="star" data-value="1">☆</span>
+                                <span class="star" data-value="2">☆</span>
+                                <span class="star" data-value="3">☆</span>
+                                <span class="star" data-value="4">☆</span>
+                                <span class="star" data-value="5">☆</span>
+                            </div>
+                            <div class="button-group">
+                                <a href="{{ url_for('product_details', id_produit=produit.id_produit) }}" class="btn">Voir détails</a>
+                                <button class="btn btn-purchase" data-product-id="{{ produit.id_produit }}" data-product-name="{{ produit.nomproduit }}">Acheter</button>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>Aucune recommandation disponible pour le moment.</p>
+            {% endif %}
+        </div>
+    
+        <!-- Section Produits Disponibles -->
+        <div class="section">
+            <h2 class="section-title">Produits disponibles :</h2>
+            {% if produits_disponibles %}
+                <ul class="product-list">
+                    {% for produit in produits_disponibles %}
+                        <li class="product-item">
+                            <img src="{{ url_for('static', filename='images/' + produit.image_url if produit.image_url else 'images/default.jpg') }}" alt="{{ produit.nomproduit }}" class="product-image">
+                            <h3>{{ produit.nomproduit }}</h3>
+                            <p><strong>Prix :</strong> {{ produit.prix }} €</p>
+                            <p><strong>Description :</strong> {{ produit.description[:100] }}...</p>
+                            <div class="rating-stars" data-product-id="{{ produit.id_produit }}" data-current-rating="{{ produit.note if produit.note is defined else 0 }}">
+                                <span class="star" data-value="1">☆</span>
+                                <span class="star" data-value="2">☆</span>
+                                <span class="star" data-value="3">☆</span>
+                                <span class="star" data-value="4">☆</span>
+                                <span class="star" data-value="5">☆</span>
+                            </div>
+                            <div class="button-group">
+                                <a href="{{ url_for('product_details', id_produit=produit.id_produit) }}" class="btn">Voir détails</a>
+                                <button class="btn btn-purchase" data-product-id="{{ produit.id_produit }}" data-product-name="{{ produit.nomproduit }}">Acheter</button>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>Aucun produit disponible pour le moment.</p>
+            {% endif %}
+        </div>
+    
+        <!-- Section Produits Notés -->
+        <div class="section">
+            <h2 class="section-title">Produits que vous avez notés :</h2>
+            {% if produits_notes %}
+                <ul class="product-list">
+                    {% for produit in produits_notes %}
+                        <li class="product-item">
+                            <img src="{{ url_for('static', filename='images/' + produit.image_url) }}" alt="{{ produit.nomproduit }}" class="product-image">
+                            <h3>{{ produit.nomproduit }}</h3>
+                            <p><strong>Prix :</strong> {{ produit.prix }} €</p>
+                            <p><strong>Note :</strong>
+                                {% for i in range(1, 6) %}
+                                    {% if i <= produit.note %}
+                                        ★
+                                    {% else %}
+                                        ☆
+                                    {% endif %}
+                                {% endfor %}
+                            </p>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>Aucun produit n'a été noté encore.</p>
+            {% endif %}
+        </div>
+    
+        <div class="text-center">
+            <a href="{{ url_for('index') }}" class="btn">Retour à l'accueil</a>
+        </div>
+    </div>
+
+    <!-- Modal de confirmation d'achat -->
+    <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmationModalLabel">Confirmation d'achat</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="confirmationText">Voulez-vous vraiment acheter ce produit ?</p>
+                    <label for="quantity">Quantité :</label>
+                    <input type="number" id="quantity" name="quantity" min="1" value="1" class="form-control">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary" id="confirmPurchase">Confirmer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de succès d'achat -->
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="successModalLabel">Achat confirmé</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="successMessage">Produit acheté avec succès !</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Gestion des étoiles de notation
+            const ratingStars = document.querySelectorAll('.rating-stars');
+            
+            ratingStars.forEach(starsContainer => {
+                const stars = starsContainer.querySelectorAll('.star');
+                const productId = starsContainer.getAttribute('data-product-id');
+                const currentRating = parseInt(starsContainer.getAttribute('data-current-rating')) || 0;
+
+                updateStars(stars, currentRating);
+
+                stars.forEach(star => {
+                    star.addEventListener('click', function () {
+                        const value = parseInt(this.getAttribute('data-value'));
+                        updateStars(stars, value);
+                        submitRating(productId, value);
+                    });
+
+                    star.addEventListener('mouseover', function () {
+                        const value = parseInt(this.getAttribute('data-value'));
+                        updateStars(stars, value);
+                    });
+
+                    star.addEventListener('mouseout', function () {
+                        updateStars(stars, currentRating);
+                    });
+                });
+            });
+
+            // Gestion des boutons d'achat
+            const buyButtons = document.querySelectorAll('.btn-purchase');
+            const confirmationModal = new bootstrap.Modal(document.getElementById('confirmationModal'));
+            const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+            const confirmationText = document.getElementById('confirmationText');
+            const successMessage = document.getElementById('successMessage');
+            
+            let currentProductId = null;
+            let currentProductName = null;
+
+            buyButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    currentProductId = this.getAttribute('data-product-id');
+                    currentProductName = this.getAttribute('data-product-name');
+                    
+                    // Mettre à jour le texte de confirmation
+                    confirmationText.textContent = `Voulez-vous vraiment acheter "${currentProductName}" ?`;
+                    
+                    // Afficher la modal de confirmation
+                    confirmationModal.show();
+                });
+            });
+
+            // Gestion de la confirmation d'achat
+            document.getElementById('confirmPurchase').addEventListener('click', function() {
+                const quantity = document.getElementById('quantity').value; // Récupérer la quantité
+
+                fetch('/submit-purchase', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        productId: currentProductId,
+                        quantity: quantity
+                    }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Afficher le message de succès
+                        successMessage.textContent = `"${currentProductName}" a été acheté avec succès !`;
+                        confirmationModal.hide();
+
+                        setTimeout(() => {
+                            successModal.show();
+                        }, 300);
+                    } else {
+                        alert(data.message || 'Erreur lors de l\'achat');
+                    }
+                })
+                .catch(error => {
+                    console.error('Erreur:', error);
+                    alert('Erreur lors de l\'achat.');
+                });
+            });
+
+            function updateStars(stars, value) {
+                stars.forEach((star, index) => {
+                    if (index < value) {
+                        star.textContent = '★';
+                        star.classList.add('active');
+                    } else {
+                        star.textContent = '☆';
+                        star.classList.remove('active');
+                    }
+                });
+            }
+
+            function submitRating(productId, rating) {
+                fetch('/submit-rating', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        productId: productId,
+                        rating: rating
+                    }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Note enregistrée avec succès');
+                        window.location.reload();
+                    } else {
+                        alert(data.message || 'Erreur lors de l\'enregistrement de la note');
+                    }
+                })
+                .catch(error => {
+                    console.error('Erreur:', error);
+                    alert('Erreur lors de l\'enregistrement de la note.');
+                });
+            }
+        });
+
+        function toggleMenu() {
+            const navUl = document.getElementById('nav-ul');
+            navUl.style.display = navUl.style.display === 'none' ? 'flex' : 'none';
+        }
+    </script>
+</body>
+</html>

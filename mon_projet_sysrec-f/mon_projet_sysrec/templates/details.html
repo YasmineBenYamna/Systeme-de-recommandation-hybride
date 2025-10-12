@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détails du Produit</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* ===== NAVIGATION ===== */
+        nav {
+            background-color: #252525;
+            color: white;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        nav .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #ff4a52;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            margin: 0;
+            padding: 0;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            color: #ff4a52;
+            background-color: transparent;
+        }
+        
+
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #252525;
+            margin: 40px 0 20px;
+            position: relative;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 3px;
+            background-color: #ff4a52;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -10px;
+        }
+
+        .product-container {
+            max-width: 1200px; /* Augmenter la largeur du conteneur global */
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 40px; /* Augmenter le padding pour plus d'espace */
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .product-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-details img {
+            max-width: 350px; /* Augmenter la taille de l'image */
+            border-radius: 10px;
+        }
+
+        .product-info {
+            flex: 1;
+            max-width: 600px; /* Augmenter la largeur de la section info */
+        }
+
+        .product-info h2 {
+            margin-top: 0;
+            font-size: 1.8rem;
+            color: #252525;
+        }
+
+        .product-info p {
+            margin: 10px 0;
+        }
+
+        .price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ff4a52;
+        }
+
+        .recommended-section {
+            margin-top: 50px;
+        }
+
+        .recommended-section h3 {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: #252525;
+        }
+
+        .recommended-products {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .recommended-card {
+            flex: 1 1 calc(50% - 30px);
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            padding: 30px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .recommended-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .recommended-card img {
+            width: 150px;
+            height: auto;
+            margin-bottom: 15px;
+        }
+
+        .recommended-card h4 {
+            font-size: 1.2rem;
+            margin: 10px 0 0;
+            color: #333;
+        }
+
+        .back-link {
+            display: block;
+            margin: 40px auto 20px;
+            width: fit-content;
+            padding: 10px 25px;
+            background-color: #252525;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            background-color: #ff4a52;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .product-details {
+                flex-direction: column;
+            }
+
+            .recommended-card {
+                flex: 1 1 100%;
+            }
+
+            .recommended-card img {
+                width: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="logo">Frica</div>
+        <ul>
+            <li><a href="{{ url_for('index') }}">Accueil</a></li>
+            <li><a href="{{ url_for('computers') }}">Produits</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact</a></li>
+            <li><a href="{{ url_for('login') }}">Login</a></li>
+        </ul>
+    </nav>
+
+    <h1>Détails du Produit</h1>
+
+    <div class="product-container">
+        <div class="product-details">
+            {% if product and product.image_url %}
+                <img src="{{ url_for('static', filename=product.image_url) }}" alt="{{ product.nomproduit }}">
+            {% endif %}
+
+            <div class="product-info">
+                <h2>{{ product.nomproduit if product else 'N/A' }}</h2>
+                <p>{{ product.description if product else 'N/A' }}</p>
+                <p class="price">{{ "%.2f"|format(product.prix) if product else '0.00' }} €</p>
+            </div>
+        </div>
+
+        <!-- Produits Recommandés -->
+        <div class="recommended-section">
+            <h3>Produits Recommandés</h3>
+            <div class="recommended-products">
+                {% for i in range(1, 4) %}
+                    {% set top_key = 'top' ~ i %}
+                    {% set top_id = product[top_key] if product and product[top_key] else None %}
+                    {% set top_product = products_dict.get(top_id) if top_id and products_dict is defined else None %}
+
+                    <div class="recommended-card">
+                        {% if top_product %}
+                            <a href="{{ url_for('product_details', id_produit=top_product.id_produit) }}">
+                                {% if top_product.image_url %}
+                                    <img src="{{ url_for('static', filename=top_product.image_url) }}" alt="{{ top_product.nomproduit }}">
+                                {% else %}
+                                    <div style="color:#aaa; font-size:0.9rem;">Image non disponible</div>
+                                {% endif %}
+                                <h4>Top {{ i }} - {{ top_product.nomproduit }}</h4>
+                            </a>
+                        {% else %}
+                            <p>Top {{ i }}<br>Aucun produit associé</p>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <a class="back-link" href="{{ url_for('computers') }}">← Retour à la liste des produits</a>
+
+</body>
+</html>
