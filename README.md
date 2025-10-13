@@ -29,8 +29,3 @@ L’objectif est de proposer des recommandations adaptées aux préférences ind
 - **Bibliothèques Python** : NLTK, NumPy, SciPy, Scikit-learn, Pandas  
 - **Frontend** : HTML, CSS, JavaScript  
 - **Autres** : PHP (utilisé pour certaines interactions)  
-
----
-
-## Structure du projet
-
